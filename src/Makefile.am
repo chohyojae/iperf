@@ -45,9 +45,9 @@ libiperf_la_SOURCES     = \
 
 # Specify the sources and various flags for the iperf binary
 iperf3_SOURCES          = main.c
-iperf3_CFLAGS           = -g
+iperf3_CFLAGS           = -g -I{FF_PATH}/lib
 iperf3_LDADD            = libiperf.la
-iperf3_LDFLAGS          = -g
+iperf3_LDFLAGS          = -g -L{FF_PATH}/lib -Wl,--whole-archive,-lfstack,--no-whole-archive -L{FF_DPDK}/lib -Wl,--whole-archive,-ldpdk,--no-whole-archive
 
 if ENABLE_PROFILING
 # If the iperf-profiled-binary is enabled (and this condition is true by default)
@@ -56,9 +56,9 @@ if ENABLE_PROFILING
 iperf3_profile_SOURCES  = main.c \
                           $(libiperf_la_SOURCES)
 
-iperf3_profile_CFLAGS   = -pg -g
+iperf3_profile_CFLAGS   = -pg -g -I{FF_PATH}/lib
 iperf3_profile_LDADD    = libiperf.la
-iperf3_profile_LDFLAGS  = -pg -g
+iperf3_profile_LDFLAGS  = -pg -g _L{FF_PATH}/lib -Wl,--whole-archive,-lfstack,--no-whole-archive -L{FF_DPDK}/lib -Wl,--whole-archive,-ldpdk,--no-whole-archive
 endif
 
 # Specify the sources and various flags for the test cases

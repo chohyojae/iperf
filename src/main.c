@@ -48,6 +48,7 @@
 #include "iperf_locale.h"
 #include "net.h"
 
+char ** argv_global;
 
 static int run(struct iperf_test *test);
 
@@ -56,6 +57,8 @@ static int run(struct iperf_test *test);
 int
 main(int argc, char **argv)
 {
+
+	argv_global = argv;
     struct iperf_test *test;
 
     // XXX: Setting the process affinity requires root on most systems.
